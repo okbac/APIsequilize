@@ -1,0 +1,7 @@
+{
+"database" : "MaClasse",
+ "username" : "root",
+ "password" : "admin",
+ "host" : "localhost",
+ "port" : 3306
+}
