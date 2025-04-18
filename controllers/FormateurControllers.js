@@ -39,5 +39,43 @@ class FormateurController {
       res.json({ error: "Erreur lors de l'ajout de la formateur" });
     }
   }
+
+  async updateFormateur(req, res) {
+    try {
+    const formateur = await
+    FormateurService.updateFormateur(req.params.id, req.body);
+    
+    if (!formateur) {
+    return res.status(404).json({ error:
+    'Formateur non trouvée' });
+    }
+    res.json(formateur);
+    
+    } catch (error) { 
+    res.status(500);
+    res.json({ error: 'Erreur lors de la mise à jour de formateur' });
+    
+    }
+    }
+    
+    async deleteFormateur(req, res) {
+      try {
+      const formateur = await
+      FormateurService.deleteFormateur(req.params.id);
+      
+      if (!formateur) {
+      return res.status(404).json({ error:
+      'Formateur non trouvée' });
+      
+      }
+      res.json({ message: 'Formateur supprimée avecsuccès' });
+      
+      } catch (error) { 
+      console.log(error); 
+      res.status(500); 
+      res.json({ error: 'Erreur lors de la suppression du formateur' });
+      
+      }
+      }
 }
 module.exports = new FormateurController();

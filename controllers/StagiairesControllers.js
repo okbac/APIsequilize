@@ -1,24 +1,76 @@
-const StagiaireService = require("../services/StagiaireService");
-// on importe le service stagiaire
+const StagiairesService = require("../services/StagiairesService");
+
 class StagiaireController {
-  // on declare la classe stagiaireController
   async getAllStagiaires(req, res) {
-    // on declare la fonction getAllStagiaires
     try {
-      // on declare le try
-      const stagiaires = await StagiaireService.getAllStagiaires();
-      // on declare la const stagiaires qui va recuperer tous les stagiaires
+      const stagiaires = await StagiairesService.getAllStagiaires();
       res.json(stagiaires);
-      // on renvoie les stagiaires au format json
     } catch (error) {
-      // on declare le catch
-      console.log(error); // on affiche l'erreur dans la
-      console;
-      res.status(500); // on declare le status 500
+      console.log(error);
+      res.status(500);
       res.json({ error: "Erreur lors de la récupération des stagiaires" });
-      // on renvoie l'erreur au format json
+    }
+  }
+
+  async addStagiaires(req, res) {
+    try {
+      const stagiares = await StagiairesService.addStagiaires(req.body);
+      res.status(201).json(stagiares);
+    } catch (error) {
+      console.log(error);
+      res.status(500);
+      res.json({ error: "Erreur lors de l'ajout du stagiaire" });
+    }
+  }
+
+  async getStagiairesById(req, res) {
+    try {
+      const stagiaires = await StagiairesService.getStagiairesById(
+        req.params.id
+      );
+      if (!Stagiaires) {
+        return res.status(404).json({ error: "stagiaire non trouvée" });
+      }
+      res.json(stagiaires);
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .json({ error: "Erreur lors de la récupération du stagiaire" });
+    }
+  }
+
+  async updateStagiaires(req, res) {
+    try {
+      const formation = await StagiairesService.updateStagiaires(
+        req.params.id,
+        req.body
+      );
+      if (!formation) {
+        return res.status(404).json({ error: "Stagiaire non trouvée" });
+      }
+      res.json(stagiaires);
+    } catch (error) {
+      console.log(error);
+      res.status(500);
+      res.json({ error: "Erreur lors de la mise à jour du stagiaire" });
+    }
+  }
+
+  async deleteStagiaires(req, res) {
+    try {
+      const stagiaires = await StagiairesService.deleteStagiaires(
+        req.params.id
+      );
+      if (!stagiaires) {
+        return res.status(404).json({ error: "Stagiaire non trouvée" });
+      }
+      res.json({ message: "Stagiaire supprimée avecsuccès" });
+    } catch (error) {
+      console.log(error);
+      res.status(500);
+      res.json({ error: "Erreur lors de la suppression du stagiaires" });
     }
   }
 }
 module.exports = new StagiaireController();
-// on exporte la classe stagiaireController
