@@ -1,11 +1,12 @@
-const { } = require("sequelize");
+const {} = require("sequelize");
 const Stagiaires = require("../models/Stagiaires");
 // on importe sequelize
 // on importe le model stagiaires
 class StagiaireService {
-async getAllStagiaires() { // on declare la fonction getAllStagiaires
-return await Stagiaires.findAll(); // on renvoie tous les stagiaires
-}
+  async getAllStagiaires() {
+    // on declare la fonction getAllStagiaires
+    return await Stagiaires.findAll(); // on renvoie tous les stagiaires
+  }
 }
 module.exports = new StagiaireService();
 // on exporte le service stagiaire

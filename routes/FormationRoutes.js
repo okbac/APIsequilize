@@ -6,3 +6,11 @@ router.get("/", (req, res) => {
   FormationController.getAllFormation(req, res);
 });
 module.exports = router;
+
+router.post("/", (req, res) => {
+  FormationController.addFormation(req, res);
+});
+
+router.get("/:id", (req, res) => {
+  FormationController.getFormationById(req, res);
+});
